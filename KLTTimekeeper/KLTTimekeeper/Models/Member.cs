@@ -16,5 +16,7 @@ namespace KLTTimekeeper.Models
         [Key, Column(Order = 1)]
         [ForeignKey("Group")]
         public int GroupID { get; set; }
+
+        public ICollection<TimeCard> TimeCards { get; set; }
     }
 }

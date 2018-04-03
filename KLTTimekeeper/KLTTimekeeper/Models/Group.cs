@@ -14,5 +14,7 @@ namespace KLTTimekeeper.Models
         //[ForeignKey("Project")]
         public int ProjectID { get; set; }
         public string GroupName { get; set; }
+
+        public ICollection<Member> Members { get; set; }
     }
 }
