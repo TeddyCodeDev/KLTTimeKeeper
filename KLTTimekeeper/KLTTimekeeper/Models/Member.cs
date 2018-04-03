@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace KLTTimekeeper.Models
 {
-    public class TimeCard
+    public class Member
     {
-        [Key]
-        public int TimeCardID { get; set; }
+        //Two Foreign Keys.
+        [Key, Column(Order = 0)]
         [ForeignKey("User")]
         public int UserID { get; set; }
+        [Key, Column(Order = 1)]
         [ForeignKey("Group")]
         public int GroupID { get; set; }
-
-        public DateTime ClockIn { get; set; }
-        public DateTime ClockOut { get; set; }
-        //To get the difference between ClockOut and ClockIn, use ClockOut.Subtract(ClockIn). 
-        
     }
 }
