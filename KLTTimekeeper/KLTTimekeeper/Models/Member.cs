@@ -10,10 +10,9 @@ namespace KLTTimekeeper.Models
     public class Member
     {
         //Two Foreign Keys.
-        [Key, Column(Order = 0)]
+        public int MemberID { get; set; }
         [ForeignKey("User")]
         public int UserID { get; set; }
-        [Key, Column(Order = 1)]
         [ForeignKey("Group")]
         public int GroupID { get; set; }
 
