@@ -9,6 +9,7 @@ namespace KLTTimekeeper.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        
+        private String FirstName { get; set; }
+        private String LastName { get; set; }
     }
 }
