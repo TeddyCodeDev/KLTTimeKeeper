@@ -12,5 +12,16 @@ namespace KLTTimekeeper.Models
         public int ProjectID { get; set; }
 
         public ICollection<Group> Groups { get; set; }
+
+        //time project was created and when it is due
+        public DateTime dateCreated { get; set; }
+        public DateTime dateDue { get; set; }
+
+        ////course the project was created in/for
+        //public string course { get; set; }
+
+        //name of the project
+        public string projectName { get; set; }
+
     }
 }
