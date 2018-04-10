@@ -10,22 +10,22 @@ using KLTTimekeeper.Models;
 
 namespace KLTTimekeeper.Controllers
 {
-    public class ProjectsController : Controller
+    public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProjectsController(ApplicationDbContext context)
+        public CoursesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Projects
+        // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Project.ToListAsync());
+            return View(await _context.Course.ToListAsync());
         }
 
-        // GET: Projects/Details/5
+        // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace KLTTimekeeper.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Project
-                .SingleOrDefaultAsync(m => m.ProjectID == id);
-            if (project == null)
+            var course = await _context.Course
+                .SingleOrDefaultAsync(m => m.CourseID == id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(project);
+            return View(course);
         }
 
-        // GET: Projects/Create
+        // GET: Courses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Projects/Create
+        // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectID,dateCreated,dateDue,projectName")] Project project)
+        public async Task<IActionResult> Create([Bind("CourseID,InstructorID,CourseName")] Course course)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(project);
+                _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(course);
         }
 
-        // GET: Projects/Edit/5
+        // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace KLTTimekeeper.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectID == id);
-            if (project == null)
+            var course = await _context.Course.SingleOrDefaultAsync(m => m.CourseID == id);
+            if (course == null)
             {
                 return NotFound();
             }
-            return View(project);
+            return View(course);
         }
 
-        // POST: Projects/Edit/5
+        // POST: Courses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,dateCreated,dateDue,projectName")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("CourseID,InstructorID,CourseName")] Course course)
         {
-            if (id != project.ProjectID)
+            if (id != course.CourseID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace KLTTimekeeper.Controllers
             {
                 try
                 {
-                    _context.Update(project);
+                    _context.Update(course);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectExists(project.ProjectID))
+                    if (!CourseExists(course.CourseID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace KLTTimekeeper.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(course);
         }
 
-        // GET: Projects/Delete/5
+        // GET: Courses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace KLTTimekeeper.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Project
-                .SingleOrDefaultAsync(m => m.ProjectID == id);
-            if (project == null)
+            var course = await _context.Course
+                .SingleOrDefaultAsync(m => m.CourseID == id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(project);
+            return View(course);
         }
 
-        // POST: Projects/Delete/5
+        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectID == id);
-            _context.Project.Remove(project);
+            var course = await _context.Course.SingleOrDefaultAsync(m => m.CourseID == id);
+            _context.Course.Remove(course);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProjectExists(int id)
+        private bool CourseExists(int id)
         {
-            return _context.Project.Any(e => e.ProjectID == id);
+            return _context.Course.Any(e => e.CourseID == id);
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<KLTTimekeeper.Models.TimeCard>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroupID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClockIn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClockOut)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClockIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClockOut)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TimeCardID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TimeCardID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TimeCardID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

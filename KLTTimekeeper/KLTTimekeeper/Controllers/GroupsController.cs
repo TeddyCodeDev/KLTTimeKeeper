@@ -22,8 +22,7 @@ namespace KLTTimekeeper.Controllers
         // GET: Groups
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Group.Include(@ => @.Project);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Group.ToListAsync());
         }
 
         // GET: Groups/Details/5
@@ -35,7 +34,6 @@ namespace KLTTimekeeper.Controllers
             }
 
             var @group = await _context.Group
-                .Include(@ => @.Project)
                 .SingleOrDefaultAsync(m => m.GroupID == id);
             if (@group == null)
             {
@@ -48,7 +46,6 @@ namespace KLTTimekeeper.Controllers
         // GET: Groups/Create
         public IActionResult Create()
         {
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "ProjectID");
             return View();
         }
 
@@ -65,7 +62,6 @@ namespace KLTTimekeeper.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "ProjectID", @group.ProjectID);
             return View(@group);
         }
 
@@ -82,7 +78,6 @@ namespace KLTTimekeeper.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "ProjectID", @group.ProjectID);
             return View(@group);
         }
 
@@ -118,7 +113,6 @@ namespace KLTTimekeeper.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "ProjectID", @group.ProjectID);
             return View(@group);
         }
 
@@ -131,7 +125,6 @@ namespace KLTTimekeeper.Controllers
             }
 
             var @group = await _context.Group
-                .Include(@ => @.Project)
                 .SingleOrDefaultAsync(m => m.GroupID == id);
             if (@group == null)
             {

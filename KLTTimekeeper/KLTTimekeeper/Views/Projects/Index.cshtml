@@ -4,28 +4,44 @@
     ViewData["Title"] = "Index";
 }
 
+<h2>Index</h2>
 
-@*<h2>Course Name</h2>
-<h2>Projects</h2>*@
-
-<h4>Project</h4>
-<hr />
-@*<table>
-    <thead>Project</thead>
-    <thead>Date Created</thead>
-    <thead>Date Due</thead>
-    @foreach (var item in Model)
-    {
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
         <tr>
-            <td>item.projectName</td>
-            <td>item.dateCreated</td>
-            <td>item.dateDue</td>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateCreated)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateDue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.projectName)
+                </th>
+            <th></th>
         </tr>
-
-    }
-</table>*@
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.projectName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProjectID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProjectID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProjectID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
