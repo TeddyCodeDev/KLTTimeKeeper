@@ -19,11 +19,14 @@ namespace KLTTimekeeper.Controllers
             _context = context;
         }
 
+        //if user is admin/instructor
+        //then allow them to create, edit, or delete items for courses they can view
+
+        //viewable by everyone
         //home/Projects
         public ActionResult Index()
         {
-
-            //if 
+            //create list for projects and pass to view
             return View("Index");
         }
     }
