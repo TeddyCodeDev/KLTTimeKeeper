@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace KLTTimekeeper.Data.Migrations
+namespace KLTTimekeeper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180405021454_memberUpdate")]
-    partial class memberUpdate
+    [Migration("20180410032645_UpdateAll")]
+    partial class UpdateAll
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,6 +72,24 @@ namespace KLTTimekeeper.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("KLTTimekeeper.Models.Course", b =>
+                {
+                    b.Property<int>("CourseID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("CourseName");
+
+                    b.Property<int>("InstructorID");
+
+                    b.HasKey("CourseID");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Course");
+                });
+
             modelBuilder.Entity("KLTTimekeeper.Models.Group", b =>
                 {
                     b.Property<int>("GroupID")
@@ -109,7 +127,17 @@ namespace KLTTimekeeper.Data.Migrations
                     b.Property<int>("ProjectID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("CourseID");
+
+                    b.Property<DateTime>("dateCreated");
+
+                    b.Property<DateTime>("dateDue");
+
+                    b.Property<string>("projectName");
+
                     b.HasKey("ProjectID");
+
+                    b.HasIndex("CourseID");
 
                     b.ToTable("Project");
                 });
@@ -244,6 +272,13 @@ namespace KLTTimekeeper.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("KLTTimekeeper.Models.Course", b =>
+                {
+                    b.HasOne("KLTTimekeeper.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+                });
+
             modelBuilder.Entity("KLTTimekeeper.Models.Group", b =>
                 {
                     b.HasOne("KLTTimekeeper.Models.Project")
@@ -258,6 +293,13 @@ namespace KLTTimekeeper.Data.Migrations
                         .WithMany("Members")
                         .HasForeignKey("GroupID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KLTTimekeeper.Models.Project", b =>
+                {
+                    b.HasOne("KLTTimekeeper.Models.Course")
+                        .WithMany("Projects")
+                        .HasForeignKey("CourseID");
                 });
 
             modelBuilder.Entity("KLTTimekeeper.Models.TimeCard", b =>
