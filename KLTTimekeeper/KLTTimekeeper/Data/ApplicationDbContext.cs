@@ -29,5 +29,7 @@ namespace KLTTimekeeper.Data
         public DbSet<KLTTimekeeper.Models.Group> Group { get; set; }
 
         public DbSet<KLTTimekeeper.Models.TimeCard> TimeCard { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.Course> Course { get; set; }
     }
 }
