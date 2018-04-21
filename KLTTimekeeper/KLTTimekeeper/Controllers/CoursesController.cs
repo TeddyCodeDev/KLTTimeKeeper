@@ -25,6 +25,12 @@ namespace KLTTimekeeper.Controllers
             return View(await _context.Course.ToListAsync());
         }
 
+
+        // GET: Courses/Registration
+        public async Task<IActionResult> Register()
+        {
+            return View(await _context.Course.ToListAsync());
+        }
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
