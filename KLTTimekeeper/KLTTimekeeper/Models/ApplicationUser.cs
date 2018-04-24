@@ -9,6 +9,7 @@ namespace KLTTimekeeper.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        
+        public bool isAdmin { get; set; }
+        public bool isInstructor { get; set; }
     }
 }

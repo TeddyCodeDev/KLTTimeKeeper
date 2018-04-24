@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-KLTTimekeeper-D34526FA-FA69-472F-BADA-AD64ED3C4BC1</UserSecretsId>
+    <ApplicationIcon />
+    <Win32Resource />
   </PropertyGroup>
 
 
