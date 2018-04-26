@@ -32,6 +32,10 @@ namespace KLTTimekeeper.Data
 
         public DbSet<KLTTimekeeper.Models.Course> Course { get; set; }
 
-        public DbSet<KLTTimekeeper.Models.Member> Member { get; set; }
+        public DbSet<KLTTimekeeper.Models.CourseMember> CourseMember { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.GroupMember> GroupMember { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.ApplicationUser> ApplicationUser { get; set; }
     }
 }

@@ -7,22 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KLTTimekeeper.Data;
 using KLTTimekeeper.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace KLTTimekeeper.Controllers
 {
     public class CoursesController : Controller
     {
+
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public CoursesController(ApplicationDbContext context)
+        public CoursesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Course.ToListAsync());
+            ApplicationUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (user.isAdmin)
+            {
+                return View(await _context.Course.ToListAsync());
+
+            }
+
+            List<Course> courses = new List<Course>();
+            CourseMembersController membersController = new CourseMembersController(_context);
+            foreach (CourseMember cM in membersController.getCoursesForMember(user).ToList())
+            {
+                courses.Add(await _context.Course.SingleOrDefaultAsync(m => m.CourseID == cM.CourseID));
+            }
+
+            return View(courses);
         }
 
 
@@ -31,6 +50,28 @@ namespace KLTTimekeeper.Controllers
         {
             return View(await _context.Course.ToListAsync());
         }
+
+        /// <summary>
+        /// Register for course
+        /// </summary>
+        /// <param name="cM"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterForCourse()
+        {
+            int userID = Int32.Parse(Request.Query["userID"]);
+            int courseID = Int32.Parse(Request.Query["CourseID"]);
+            CourseMember cM = new CourseMember { UserID = userID, CourseID = courseID };
+            if (ModelState.IsValid)
+            {
+                _context.Add(cM);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(cM);
+        }
+
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {

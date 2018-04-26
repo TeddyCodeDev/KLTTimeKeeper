@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Identity;
 namespace KLTTimekeeper.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser 
     {
         public bool isAdmin { get; set; }
         public bool isInstructor { get; set; }
+
+        public ICollection<CourseMember> CourseMembers { get; set; }
+        public ICollection<Group> Groups { get; set; }
     }
 }

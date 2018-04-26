@@ -16,6 +16,7 @@ namespace KLTTimekeeper.Models
         public ApplicationUser ApplicationUser { get; set; }
         public String CourseName { get; set; }
 
+        public ICollection<CourseMember> CourseMembers { get; set; }
         public ICollection<Project> Projects { get; set; }
     }
 }

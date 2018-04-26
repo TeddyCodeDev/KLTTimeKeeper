@@ -11,7 +11,7 @@ namespace KLTTimekeeper.Models
     {
         [Key]
         public int TimeCardID { get; set; }
-        [ForeignKey("User")]
+        [ForeignKey("ApplicationUser")]
         public int UserID { get; set; }
         [ForeignKey("Group")]
         public int GroupID { get; set; }
