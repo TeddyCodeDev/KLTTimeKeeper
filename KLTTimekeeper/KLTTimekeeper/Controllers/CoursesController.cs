@@ -56,20 +56,20 @@ namespace KLTTimekeeper.Controllers
         /// </summary>
         /// <param name="cM"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterForCourse()
         {
-            int userID = Int32.Parse(Request.Query["userID"]);
-            int courseID = Int32.Parse(Request.Query["CourseID"]);
-            CourseMember cM = new CourseMember { UserID = userID, CourseID = courseID };
+            //int userID = Int32.Parse(Request.Query["userID"]);
+            //int courseID = Int32.Parse(Request.Query["CourseID"]);
+            //CourseMember cM = new CourseMember { UserID = userID, CourseID = courseID };
+
             if (ModelState.IsValid)
             {
-                _context.Add(cM);
+                //_context.Add(cM);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cM);
+            //return View(cM);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Courses/Details/5

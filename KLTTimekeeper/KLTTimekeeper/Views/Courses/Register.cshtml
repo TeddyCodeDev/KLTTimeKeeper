@@ -29,9 +29,13 @@
                     @Html.DisplayFor(modelItem => item.CourseName)
                 </td>
                 <td>
-                    @Html.ActionLink("Enroll", "RegisterForCourse", "CoursesController", new { userId = UserManager.GetUserId(User), CourseID = item.CourseID })
+                    @Html.ActionLink("Enroll", "RegisterForCourse", "Courses", new { userId = UserManager.GetUserId(User), CourseID = item.CourseID }, null)
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div>
+    <a asp-action="Index">Back to Courses</a>
+</div>
+
