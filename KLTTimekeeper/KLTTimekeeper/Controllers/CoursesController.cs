@@ -60,9 +60,9 @@ namespace KLTTimekeeper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterForCourse()
         {
-            string userID = Request.QueryString("userID");
-            string courseID = Request.QueryString["CourseID"];
-
+            int userID = Int32.Parse(Request.Query["userID"]);
+            int courseID = Int32.Parse(Request.Query["CourseID"]);
+            CourseMember cM = new CourseMember { UserID = userID, CourseID = courseID };
             if (ModelState.IsValid)
             {
                 _context.Add(cM);
