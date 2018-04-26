@@ -15,6 +15,6 @@ namespace KLTTimekeeper.Models
         public int ProjectID { get; set; }
         public string GroupName { get; set; }
 
-        public ICollection<Member> Members { get; set; }
+        public ICollection<GroupMember> GroupMembers { get; set; }
     }
 }

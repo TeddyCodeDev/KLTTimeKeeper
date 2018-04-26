@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<KLTTimekeeper.Models.Course>
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Register";
@@ -28,7 +29,7 @@
                     @Html.DisplayFor(modelItem => item.CourseName)
                 </td>
                 <td>
-                    <button type="button">Enroll</button>
+                    @Html.ActionLink("Enroll", "RegisterForCourse", "CoursesController", new { userId = UserManager.GetUserId(User), CourseID = item.CourseID })
                 </td>
             </tr>
         }

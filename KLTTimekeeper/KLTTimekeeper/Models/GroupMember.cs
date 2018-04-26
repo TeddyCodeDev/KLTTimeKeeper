@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace KLTTimekeeper.Models
 {
-    public class Member
+    public class GroupMember
     {
-        //Two Foreign Keys.
+        [Key]
         public int MemberID { get; set; }
-        [ForeignKey("User")]
+        [ForeignKey("ApplicationUser")]
         public int UserID { get; set; }
         [ForeignKey("Group")]
         public int GroupID { get; set; }
-
         public ICollection<TimeCard> TimeCards { get; set; }
     }
 }
