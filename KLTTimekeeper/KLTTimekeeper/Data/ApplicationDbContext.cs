@@ -10,6 +10,9 @@ namespace KLTTimekeeper.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Project> Project { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -22,5 +25,17 @@ namespace KLTTimekeeper.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<KLTTimekeeper.Models.Group> Group { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.TimeCard> TimeCard { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.Course> Course { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.CourseMember> CourseMember { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.GroupMember> GroupMember { get; set; }
+
+        public DbSet<KLTTimekeeper.Models.ApplicationUser> ApplicationUser { get; set; }
     }
 }

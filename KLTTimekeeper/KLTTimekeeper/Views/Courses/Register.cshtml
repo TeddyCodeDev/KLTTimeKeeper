@@ -1,0 +1,41 @@
+﻿@model IEnumerable<KLTTimekeeper.Models.Course>
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InstructorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstructorID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.ActionLink("Enroll", "RegisterForCourse", "Courses", new { userId = UserManager.GetUserId(User), CourseID = item.CourseID }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to Courses</a>
+</div>
+
