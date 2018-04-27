@@ -26,22 +26,22 @@ namespace KLTTimekeeper.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            ApplicationUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //ApplicationUser user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (user.isAdmin)
-            {
+            //if (user.isAdmin)
+            //{
                 return View(await _context.Course.ToListAsync());
 
-            }
+            //}
 
-            List<Course> courses = new List<Course>();
-            CourseMembersController membersController = new CourseMembersController(_context);
-            foreach (CourseMember cM in membersController.getCoursesForMember(user).ToList())
-            {
-                courses.Add(await _context.Course.SingleOrDefaultAsync(m => m.CourseID == cM.CourseID));
-            }
+            //List<Course> courses = new List<Course>();
+            //CourseMembersController membersController = new CourseMembersController(_context);
+            //foreach (CourseMember cM in membersController.getCoursesForMember(user).ToList())
+            //{
+            //    courses.Add(await _context.Course.SingleOrDefaultAsync(m => m.CourseID == cM.CourseID));
+            //}
 
-            return View(courses);
+            //return View(courses);
         }
 
 
